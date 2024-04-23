@@ -1,0 +1,67 @@
+{{define "title"}}Home {{end}}
+{{define "main"}}
+<form action="/" method="POST">
+        <div>
+                <label>Category</label>
+                {{range $index, $category := .Categories}}
+                    <input type="checkbox" name="categories" value="{{$index}}">{{$category}}</input>
+                {{end}}
+        </div>
+        <div>
+                <input class="Filter" type="submit" value="Apply">
+        </div>
+</form>
+
+<h2>Posts</h2>
+<div class="posts-container">
+    {{range .Posts}}
+    <div class="post-card">
+        <div class="card-header">
+            <div class="user-data">
+                <div>
+                    <p>By {{.UserName}}</p>
+                    <span><time datetime=""></time>{{humanDate .Created }}</span>
+                </div>
+            </div>
+        </div>
+            <div class="content">
+                <div class="title">
+                    <a href="post/{{.UserID}}"> {{.Title}} </a>
+                </div>
+                <div class="desc">
+                    {{.Content}}
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="category-tags-wrapper">
+                    {{range $category := .Categories}}
+                    <div class="category-tag">{{$category}}</div>
+                    {{end}}
+                </div>
+                <div>
+                    <span>Likes: {{.Like}} </span> <span>
+                        Dislikes: {{.Dislike}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    {{end}}
+</div>
+
+<div class="pagination">
+    {{ $currentPage := .CurrentPage }}
+    {{ if gt $currentPage 1 }}
+    <a href="/?page={{sub $currentPage 1}}">Previous</a>
+    {{ end }}
+    {{ range $i := sequence 1 .NumberOfPage }}
+        {{ if eq $i $currentPage }}
+            <span>{{$i}}</span>
+        {{ else }}
+            <a href="/?page={{$i}}">{{$i}}</a>
+        {{ end }}
+    {{ end }}
+    {{ if lt $currentPage .NumberOfPage }}
+    <a href="/?page={{add $currentPage 1}}">Next</a>
+    {{ end }}
+</div>
+{{end}}

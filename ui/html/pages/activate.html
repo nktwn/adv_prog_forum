@@ -1,0 +1,20 @@
+{{define "title"}}Activate{{end}}
+
+{{define "main"}}
+<h2>Activate Your Account</h2>
+<form action="/activate" method="POST" novalidate>
+    <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
+
+    <div>
+        <label>Confirmation Code:</label>
+        {{with .Form.FieldErrors.confirmationCode}}
+        <label class="error">{{.}}</label>
+        {{end}}
+        <input type="text" name="confirmationCode">
+    </div>
+
+    <div>
+        <input type="submit" value="Activate">
+    </div>
+</form>
+{{end}}

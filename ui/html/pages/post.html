@@ -1,0 +1,32 @@
+{{define "title"}}Snippet #{{end}}
+
+{{define "main"}}
+
+<div class="post-card">
+    <div class="card-header">
+        <div class="user-data">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkkazTAUNIxKrUcCEMB-7LFeClEFjRaoxAw&usqp=CAU" alt="">
+            <div>
+                <p>Aliyev Abay</p>
+                <span>5 min before</span>
+            </div>
+        </div>
+    </div>
+        <div class="content">
+            <div class="title">
+                {{.Post.Title}}
+            </div>
+            <div class="desc">
+                {{.Post.Content}}
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="category-tags-wrapper">
+                {{range $category := .Post.Categories}}
+                <div class="category-tag">{{$category}}</div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+{{end}}
+

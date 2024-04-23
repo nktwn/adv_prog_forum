@@ -1,0 +1,29 @@
+{{define "title"}}Admin Dashboard{{end}}
+
+{{define "main"}}
+<h2>Admin Dashboard</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Created</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{range .Users}}
+    <tr>
+        <td>{{.ID}}</td>
+        <td>{{.Name}}</td>
+        <td>{{.Email}}</td>
+        <td>{{humanDate .Created}}</td>
+        <td>{{.Status}}</td>
+        <td><a href="/admin/delete?id={{.ID}}">Delete</a></td>
+    </tr>
+    {{end}}
+    </tbody>
+</table>
+{{end}}

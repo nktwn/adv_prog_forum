@@ -1,0 +1,37 @@
+{{define "title"}}Your post {{end}}
+{{define "main"}}
+<h2>Your Posts</h2>
+<div class="posts-container">
+    {{range .Posts}}
+    <div class="post-card">
+        <div class="card-header">
+            <div class="user-data">
+                <div>
+                    <span><time datetime=""></time>{{humanDate .Created }}</span>
+                </div>
+            </div>
+        </div>
+            <div class="content">
+                <div class="title">
+                    <a href="post/{{.UserID}}"> {{.Title}} </a>
+                </div>
+                <div class="desc">
+                    {{.Content}}
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="category-tags-wrapper">
+                    {{range $category := .Categories}}
+                    <div class="category-tag">{{$category}}</div>
+                    {{end}}
+                </div>
+                <div>
+                    <span>Likes: {{.Like}} </span> <span>
+                        Dislikes: {{.Dislike}}
+                    </span> 
+                </div>
+            </div>
+        </div>
+    {{end}}
+</div>
+{{end}}

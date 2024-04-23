@@ -1,0 +1,33 @@
+{{define "title"}}Create a New Snippet{{end}}
+
+{{define "main"}}
+<form action="/post/create" method="POST">
+    <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
+    <div>
+        <label>Title:</label>
+        {{with .Form.FieldErrors.title}}
+        <label class="error">{{.}}</label>
+        {{end}}
+        <input type="text", name="title" value="{{.Form.Title}}">
+    </div>
+    <div>
+        <label>Content:</label>
+        {{with .Form.FieldErrors.content}}
+        <label class="error">{{.}}</label>
+        {{end}}
+        <textarea name="content">{{.Form.Content}}</textarea>
+    </div>
+    <div>
+        <label>Category</label>
+        {{with .Form.FieldErrors.categories}}
+        <label class="error">{{.}}</label>
+        {{end}}
+        {{range $index, $category := .Categories}}
+        <input type="checkbox" name="categories" value="{{$index}}">{{$category}}</input>
+        {{end}}
+    </div>
+    <div>
+        <input type="submit" value="Publish post">
+    </div>
+</form>
+{{end}}
